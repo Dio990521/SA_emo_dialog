@@ -112,7 +112,7 @@ for i in range(1,6):
         attention_mode=ATTENTION,
         args=args
         )
-    emo_classifier.load_state_dict(torch.load('saved_model/emotion_classifier' + str(i) + '.pt'))
+    emo_classifier.load_state_dict(torch.load('saved_classifier/emotion_classifier' + str(i) + '.pt'))
     emo_classifier.cuda()
     emo_classifier_list.append(emo_classifier)
     
