@@ -73,7 +73,7 @@ def sa_dialog(input, sequence_length, sources, id2sen, option, batch_size, emoti
             _ , prob_backward = seq2seq_model(input_backward_text, input_backward, sources, sequence_length_backward, id2sen)
             
             for i in range(batch_size):
-                prob_old = np.power(probs_old[i].item(), 1.0 / sequence_length[i]) * emotion_old[i].item()
+                prob_old = np.power(probs_old[i].item(), 1.0 / sequence_length[i]) * np.power(emotion_old[i].item(), option.emo_weight)
                 prob_forward = prob_forward[i, ind%(sequence_length[i]-1),:]
                 prob_backward = prob_backward[i, sequence_length[i]-1-ind%(sequence_length[i]-1)-1,:]
                 prob_mul = prob_forward * prob_backward
@@ -86,7 +86,7 @@ def sa_dialog(input, sequence_length, sources, id2sen, option, batch_size, emoti
                 emotion_new = inference_emotion(input_candidate_text, emotions[0], batch_size=option.search_size)
                 prob_new = prob_candidate.copy()
                 for j in  range(len(prob_candidate)):
-                    prob_candidate[j] = np.power(prob_candidate[j].item(), 1.0 / sequence_length_candidate[j]) * emotion_new[j].item()
+                    prob_candidate[j] = np.power(prob_candidate[j].item(), 1.0 / sequence_length_candidate[j]) * np.power(emotion_new[j].item(), option.emo_weight)
                 prob_candidate = np.array(prob_candidate)
 
                 prob_candidate_norm=normalize(prob_candidate)
@@ -124,7 +124,7 @@ def sa_dialog(input, sequence_length, sources, id2sen, option, batch_size, emoti
             _ , prob_backward = seq2seq_model(input_backward_text, input_backward, sources, sequence_length_backward, id2sen)
             
             for i in range(batch_size):
-                prob_old = np.power(probs_old[i].item(), 1.0 / sequence_length[i]) * emotion_old[i].item()
+                prob_old = np.power(probs_old[i].item(), 1.0 / sequence_length[i]) * np.power(emotion_old[i].item(), option.emo_weight)
                 prob_forward = prob_forward[i, ind%(sequence_length[i]-1),:]
                 prob_backward = prob_backward[i, sequence_length[i]-1-ind%(sequence_length[i]-1),:]
                 prob_mul = prob_forward * prob_backward
@@ -136,7 +136,7 @@ def sa_dialog(input, sequence_length, sources, id2sen, option, batch_size, emoti
                 emotion_new = inference_emotion(input_candidate_text, emotions[0], batch_size=option.search_size)
                 prob_new = prob_candidate.copy()
                 for j in  range(len(prob_candidate)):
-                    prob_candidate[j] = np.power(prob_candidate[j].item(), 1.0 / sequence_length_candidate[j]) * emotion_new[j].item()
+                    prob_candidate[j] = np.power(prob_candidate[j].item(), 1.0 / sequence_length_candidate[j]) * np.power(emotion_new[j].item(), option.emo_weight)
                 prob_candidate = np.array(prob_candidate)
 
                 prob_candidate_norm=normalize(prob_candidate)
@@ -166,7 +166,7 @@ def sa_dialog(input, sequence_length, sources, id2sen, option, batch_size, emoti
                 continue
                 
             for i in range(batch_size):
-                prob_old = np.power(probs_old[i].item(), 1.0 / sequence_length[i]) * emotion_old[i].item()
+                prob_old = np.power(probs_old[i].item(), 1.0 / sequence_length[i]) * np.power(emotion_old[i].item(), option.emo_weight)
                 input_candidate, sequence_length_candidate = generate_candidate_input(input[i],\
                     sequence_length[i], ind, None, option.search_size, option, mode=action)
                 input_candidate=np.array(input_candidate)
@@ -174,7 +174,7 @@ def sa_dialog(input, sequence_length, sources, id2sen, option, batch_size, emoti
                 prob_candidate, _ = seq2seq_model(input_candidate_text, input_candidate, sources*len(input_candidate_text), sequence_length_candidate, id2sen)
                 emotion_new = inference_emotion(input_candidate_text, emotions[0], batch_size=1)
                 prob_new = prob_candidate.copy()
-                prob_candidate[0] = np.power(prob_candidate[0].item(), 1.0 / sequence_length_candidate[0]) * emotion_new[0].item()
+                prob_candidate[0] = np.power(prob_candidate[0].item(), 1.0 / sequence_length_candidate[0]) * np.power(emotion_new[0].item(), option.emo_weight)
                 
                 V_new, V_old, alphat = computeScore(prob_candidate[0], prob_old, temperature)
                 
