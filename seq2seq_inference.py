@@ -2,7 +2,7 @@ from fairseq.models.lstm import LSTMModel
 import pickle
 import numpy as np
 import os
-#os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 print("loading seq2seq model...")
 checkpoint_path = "/local/ssd_1/stc/stc_clm/"
 
