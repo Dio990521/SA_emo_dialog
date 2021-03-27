@@ -31,7 +31,7 @@ def simulatedAnnealing_dialog(option):
     pointer = 0
     all_k_buffer_handler = [BufferHandler(os.path.join(option.this_expsdir, option.save_path))]
     total_ppl = 0
-    log = open('log.txt', 'w', encoding='utf-8')
+    #log = open('log.txt', 'w', encoding='utf-8')
     for sen_id in range(int(use_data.length/batch_size)):
         input, sequence_length, _ = use_data(batch_size, sen_id)
         sources = stc_source[pointer:pointer+batch_size]
@@ -45,12 +45,12 @@ def simulatedAnnealing_dialog(option):
 
         for k in range(option.N_repeat):
             sens, final_emo_probs = sa_dialog(input, sequence_length, sources, id2sen, option, batch_size, emotions)
-            log.write('target emotion : ' + str(emotions[0]) + ' | ' + 'target emo prob : ' + str(final_emo_probs) + '\n')
+            #log.write('target emotion : ' + str(emotions[0]) + ' | ' + 'target emo prob : ' + str(final_emo_probs) + '\n')
             for i in range(batch_size):
                 sen = ' '.join(id2sen(sens[i]))
                 
                 all_k_buffer_handler[k].appendtext(sen.replace('<s>','').replace('</s>','').strip())
-    log.close()
+    #log.close()
     # Close all k files
     for k in range(option.N_repeat):
         all_k_buffer_handler[k].close()

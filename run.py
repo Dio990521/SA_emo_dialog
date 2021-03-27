@@ -15,7 +15,7 @@ def main():
     parser.add_argument('--exps_dir', default=None, type=str)
     parser.add_argument('--exp_name', default=None, type=str)
     parser.add_argument('--load', default=None, type=str)
-    parser.add_argument('--emo_weight', default=1, type=int)
+    parser.add_argument('--emo_weight', default=1.0, type=float)
     parser.add_argument('--seq2seq_weight', default=1, type=int)
 
     # data property

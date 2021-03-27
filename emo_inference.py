@@ -136,7 +136,6 @@ class TrainDataReader(TestDataReader):
 
 
 def inference_emotion(source, selected_emotion, batch_size):
-    print(selected_emotion)
     emo_classifier.cuda()
     emo_classifier.eval()
     data_set = TestDataReader(source, 20)
@@ -147,7 +146,6 @@ def inference_emotion(source, selected_emotion, batch_size):
             decoder_logit = emo_classifier(_data.cuda(), _mask.cuda())
             softmax = nn.Softmax(dim=1)
             prob = softmax(decoder_logit)
-            print(prob)
             for i in range(batch_size):
                     pred_list.append(prob[i][int(selected_emotion)])
             del decoder_logit
