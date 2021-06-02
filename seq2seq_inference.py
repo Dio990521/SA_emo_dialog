@@ -4,10 +4,10 @@ import numpy as np
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 print("loading seq2seq model...")
-checkpoint_path = "/local/ssd_1/stc/stc_clm/"
+checkpoint_path = "/local/ssd_1/stc/nlpcc_2017/"
 
 seq2seq = LSTMModel.from_pretrained(checkpoint_path, checkpoint_file='checkpoint_best.pt',
-                                data_name_or_path=checkpoint_path+'stc_ori', beam=5)
+                                data_name_or_path=checkpoint_path, beam=2)
 seq2seq.cuda()
 seq2seq.eval()
 
