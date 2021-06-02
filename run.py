@@ -20,7 +20,7 @@ def main():
 
     # data property
     parser.add_argument('--data_path', default="/local/ssd_1/stc/stc_input.txt", type=str)
-    parser.add_argument('--dict_path', default="/local/ssd_1/chengzhang/SA_dialog/dialogue/datas/stc_dict.pkl", type=str)
+    parser.add_argument('--dict_path', default="/local/ssd_1/chengzhang/SA_dialog/big_data/nlpcc2017_dict.pkl", type=str)
     parser.add_argument('--source_data_path', default="/local/ssd_1/stc/stc_source.txt", type=str)
     parser.add_argument('--emotion_data_path', default="/local/ssd_1/stc/emotions.txt", type=str)
     parser.add_argument('--dict_size', default=30000, type=int)
